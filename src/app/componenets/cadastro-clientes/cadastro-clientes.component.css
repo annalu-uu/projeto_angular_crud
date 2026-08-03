@@ -1,0 +1,17 @@
+#div-form {
+    width: 400px;
+    margin: 30px auto;
+}
+
+#cadastro {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo {
+    margin-bottom: 15px;
+}
+
+button {
+    margin-top: 10px;
+}
