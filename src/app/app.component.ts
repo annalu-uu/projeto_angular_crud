@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CadastroClientesComponent } from './componenets/cadastro-clientes/cadastro-clientes.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CadastroClientesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
