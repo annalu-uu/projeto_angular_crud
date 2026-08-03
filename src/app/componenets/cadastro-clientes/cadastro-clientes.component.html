@@ -34,4 +34,59 @@
 
     </form>
 
+    <div id="div-lista">
+
+        <h2>Lista de Clientes</h2>
+
+        <!-- TABELA PARA MOSTRAR OS CLIENTES CADASTRADOS -->
+        <table>
+
+            <!-- CABEÇALHO DA TABELA -->
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Data Nascimento</th>
+                    <th>UF</th>
+                    <th>Município</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+    
+             <!-- CORPO DA TABELA -->
+            <tbody>
+
+                 <!-- PERCORRE A LISTA DE CLIENTES E MOSTRA CADA UM -->
+                @for(cliente of listaClientes; track $index){
+    
+                    <tr>
+                         <!-- MOSTRA OS DADOS DO CLIENTE -->
+                        <td>{{cliente.nome}}</td>
+                        <td>{{cliente.email}}</td>
+                        <td>{{cliente.cpf}}</td>
+                        <td>{{cliente.dataNascimento}}</td>
+                        <td>{{cliente.uf}}</td>
+                        <td>{{cliente.municipio}}</td>
+    
+                        <td>
+                            <button>
+                                Editar
+                            </button>
+    
+                            <button>
+                                Excluir
+                            </button>
+                        </td>
+    
+                    </tr>
+    
+                }
+    
+            </tbody>
+    
+        </table>
+    
+    </div>
+
 </div>
