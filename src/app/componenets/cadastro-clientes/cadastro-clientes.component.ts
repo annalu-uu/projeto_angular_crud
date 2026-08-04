@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } 
 //REPRENSENTA O OBJETO CLIENTE
 import { Cliente } from '../cliente'
 import { HttpClient } from '@angular/common/http'
+import { PessoaServiceService } from '../../service/pessoa-service.service';
 
 interface Municipio{
   id: number
@@ -29,6 +30,8 @@ interface Municipio{
 
 
 export class CadastroClientesComponent {
+
+  
 
 
   //FORMULÁRIO DE CADASTRO
@@ -71,6 +74,7 @@ export class CadastroClientesComponent {
   //CONSTRUTOR QUE CRIA O FORMULÁRIO
   //recebe o FormBuilder pra criar o formulário
   constructor(
+    private pessoaService: PessoaServiceService,
     private fb: FormBuilder,
     private http: HttpClient
   ) {
