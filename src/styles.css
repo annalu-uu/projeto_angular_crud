@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+/* IMPORTA A FONTE DO GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+/* CONFIGURAÇÕES GERAIS DA PÁGINA */
+* {
+
+    /* REMOVE MARGENS PADRÕES */
+    margin: 0px;
+
+    /* REMOVE ESPAÇAMENTOS INTERNOS PADRÕES */
+    padding: 0px;
+
+    /* FAZ O TAMANHO DOS ELEMENTOS CONSIDERAR BORDA E PADDING */
+    box-sizing: border-box;
+
+    /* DEFINE A FONTE PRINCIPAL DO PROJETO */
+    font-family: "Lobster Two", sans-serif;
+
+}
+
+
+/* CRIA VARIÁVEIS DE CORES PARA REUTILIZAR NO CSS */
+:root {
+
+    /* COR DE FUNDO DAS DIVS */
+    --div-fundo: #f8f9fa;
+
+    /* COR BRANCA */
+    --branca: #ffffff;
+
+    /* COR DO BOTÃO 1 */
+    --botao1: #82d6c4;
+
+    /* COR DO BOTÃO 2 */
+    --botao2: #c957a3;
+
+    /* COR PRINCIPAL 1 */
+    --cor1: #d1efdd;
+
+    /* COR PRINCIPAL 2 */
+    --cor2: #6ca7df;
+
+}
+
+

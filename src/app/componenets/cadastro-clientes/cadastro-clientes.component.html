@@ -2,7 +2,7 @@
 
     <h2>Cadastro de Clientes</h2>
 
-    <form id="cadastro" [formGroup]="formulario">
+    <form id="cadastro" [formGroup] = "formulario">
 
         <label for="nome">Nome</label>
         <input type="text" id="nome" formControlName="nome">
@@ -21,11 +21,36 @@
 
 
         <label for="uf">UF</label>
-        <input type="text" id="uf" formControlName="uf">
+
+        <select id="uf" formControlName="uf" (change)="buscarMunicipios()">
+
+            <option value="">
+                Selecione a UF
+            </option>
+
+            <option *ngFor="let uf of ufs" [value]="uf">
+                {{uf}}
+            </option>
+
+        </select>
 
 
         <label for="municipio">Município</label>
-        <input type="text" id="municipio" formControlName="municipio">
+
+        <select id="municipio" formControlName="municipio">
+
+            <option value="">
+                Selecione o município
+            </option>
+
+
+            <option *ngFor="let municipio of municipios" [value]="municipio.nome">
+
+                {{municipio.nome}}
+
+            </option>
+
+        </select>
 
 
         <button type="button" (click)="salvar()">Salvar</button>
@@ -33,6 +58,19 @@
         <button type="button" (click)="limpar()">Limpar</button>
 
     </form>
+
+    <div id="div-pesquisa">
+        <!-- CAMPO DE PESQUISA -->
+        <input 
+        type="text"
+        placeholder="Pesquisar cliente pelo nome..."
+        [formControl]="campoPesquisa">
+
+
+        <button type="button" (click)="pesquisar()">
+            Pesquisar
+        </button>
+    </div>
 
     <div id="div-lista">
 
@@ -57,33 +95,34 @@
              <!-- CORPO DA TABELA -->
             <tbody>
 
-                 <!-- PERCORRE A LISTA DE CLIENTES E MOSTRA CADA UM -->
-                @for(cliente of listaClientes; track $index){
-    
-                    <tr>
-                         <!-- MOSTRA OS DADOS DO CLIENTE -->
+                <tbody>
+
+                    <!-- PERCORRE A LISTA DE CLIENTES E CRIA UMA LINHA PARA CADA UM -->
+                    <tr *ngFor="let cliente of clientesFiltrados; let i = index">
+                
+                        <!-- MOSTRA OS DADOS DO CLIENTE -->
                         <td>{{cliente.nome}}</td>
                         <td>{{cliente.email}}</td>
                         <td>{{cliente.cpf}}</td>
                         <td>{{cliente.dataNascimento}}</td>
                         <td>{{cliente.uf}}</td>
                         <td>{{cliente.municipio}}</td>
-    
+                
                         <td>
-                            <button>
+                
+                            <button type="button" (click)="editar(i)">
                                 Editar
                             </button>
-    
-                            <button>
+                
+                            <button type="button" (click)="excluir(i)">
                                 Excluir
                             </button>
+                
                         </td>
-    
+                
                     </tr>
-    
-                }
-    
-            </tbody>
+                
+                </tbody>
     
         </table>
     

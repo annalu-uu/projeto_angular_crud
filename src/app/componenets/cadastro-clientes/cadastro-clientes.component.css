@@ -1,17 +1,141 @@
+/* DIV PRINCIPAL DA TELA */
 #div-form {
-    width: 400px;
-    margin: 30px auto;
+
+    width: 100%;
+    margin: 20px auto;
+    background-color: var(--div-fundo);
+    padding: 20px;
+    border-radius: 10px;
+
 }
 
+
+/* TÍTULOS */
+h2 {
+
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+
+/* FORMULÁRIO */
 #cadastro {
+
     display: flex;
     flex-direction: column;
+    gap: 10px;
+
 }
 
-.campo {
-    margin-bottom: 15px;
+
+/* CAMPOS DE TEXTO E SELECT */
+input,
+select {
+
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+
 }
 
+
+/* ÁREA DE PESQUISA */
+#pesquisa {
+
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+
+/* BOTÕES GERAIS */
 button {
-    margin-top: 10px;
+
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+
+/* BOTÃO SALVAR */
+button:first-of-type {
+
+    background-color: var(--botao1);
+
+}
+
+
+/* BOTÃO LIMPAR */
+button:nth-of-type(2) {
+
+    background-color: var(--botao2);
+
+}
+
+
+/* EFEITO AO PASSAR O MOUSE */
+button:hover {
+
+    opacity: 0.8;
+
+}
+
+/* ÁREA DA LISTA */
+#div-lista {
+
+    margin-top: 30px;
+
+}
+
+
+/* TABELA */
+table {
+
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+
+/* CÉLULAS DA TABELA */
+th,
+td {
+
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+
+}
+
+
+/* CABEÇALHO DA TABELA */
+th {
+
+    background-color: var(--cor2);
+    color: var(--branca);
+
+}
+
+
+/* BOTÕES DENTRO DA TABELA */
+td button {
+
+    margin: 3px;
+
+}
+
+/* BORDA DO TÍTULO */
+h2 {
+
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid var(--cor2);
+    padding: 10px;
+    border-radius: 10px;
+
 }
