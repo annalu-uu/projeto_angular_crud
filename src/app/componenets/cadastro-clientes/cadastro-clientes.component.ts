@@ -1,87 +1,68 @@
 ////IMPORTA AS DIRETIVAS DO *ngFor
-import { CommonModule } from '@angular/common'
-import { Component } from '@angular/core'
-//IMPORTA AS FERRAMENTAS PRA CRIAR O FORMULÁRIO REATIVO
-//ReactiveFormsModule: permite usar formulário reativo no HTML
-//FormBuilder: ajuda a criar o formulário
-//FormGroup: representa o formulário inteiro
-//Validators: cria regras de validação dos campos
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+//IMPORTA AS FERRAMENTAS DO FORMULÁRIO REATIVO
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
 //IMPORTA A CLASSE CLIENTE
-//REPRENSENTA O OBJETO CLIENTE
-import { Cliente } from '../cliente'
-import { HttpClient } from '@angular/common/http'
+import { Cliente } from '../cliente';
+
+//IMPORTA O HTTP E O SERVICE
+import { HttpClient } from '@angular/common/http';
 import { PessoaServiceService } from '../../service/pessoa-service.service';
 
-interface Municipio{
-  id: number
-  nome: string
+//INTERFACE DOS MUNICÍPIOS
+interface Municipio {
+  id: number;
+  nome: string;
 }
 
 @Component({
   selector: 'app-cadastro-clientes',
   standalone: true,
-  //PERMITE USAR O *ngFor E O FORMULÁRIO REATIVO NO HTML
-  //PERMITE USAR O formGroup E O formControlName NO HTML
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cadastro-clientes.component.html',
   styleUrl: './cadastro-clientes.component.css'
 })
-
-
 export class CadastroClientesComponent {
 
-  
-
-
-  //FORMULÁRIO DE CADASTRO
+  //FORMULÁRIO
   formulario: FormGroup;
 
-  campoPesquisa = new FormControl('')
+  //GUARDA O ÍNDICE DO CLIENTE EM EDIÇÃO
+  indiceEdicao: number = -1;
 
+  //LISTA DE MUNICÍPIOS
+  municipios: Municipio[] = [];
 
-  //LISTA DE CLIENTES CADASTRADOS
-  listaClientes: Cliente[] = []
+  //CONTROLA O CARREGAMENTO
+  carregandoMunicipios = false;
 
-  //GUARDA A POSIÇÃO DO CLIENTE QUE ESTÁ SENDO EDITADO
-  indiceEdicao: number = -1
+  //MENSAGEM DE ERRO
+  erroMunicipios = '';
 
-  clientesFiltrados: Cliente[] = []
-
-  //lista de municípios
-  municipios: Municipio[] = []
-
-  carregandoMuncipios = false
-
-  //não encontrados, se vire ;/
-  erroMunicipios = ''
-
-  private numeroConsultaMunicipio = 0
-
-  // null significa "novo cadastro"; um id significa "edição em andamento".
-   clienteEditandoId: string | null = null;
-
-  // Lista fixa das siglas das 27 unidades federativas brasileiras.
+  //LISTA DAS UFS
   ufs: string[] = [
     'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF',
     'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
     'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS',
     'RO', 'RR', 'SC', 'SP', 'SE', 'TO'
   ];
- 
-  
 
-  //CONSTRUTOR QUE CRIA O FORMULÁRIO
-  //recebe o FormBuilder pra criar o formulário
+  //CONSTRUTOR
   constructor(
-    private pessoaService: PessoaServiceService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private pessoaService: PessoaServiceService
   ) {
 
-    //CRIANDO O FORMULÁRIO E SEUS CAMPOS
-    //começa vazio e possui uma regra de validação.
-
+    //CRIA O FORMULÁRIO
     this.formulario = this.fb.group({
 
       nome: ['', Validators.required],
@@ -102,143 +83,74 @@ export class CadastroClientesComponent {
 
       municipio: ['', Validators.required]
 
-    })
+    });
 
   }
 
-// BUSCA OS MUNICÍPIOS DE ACORDO COM A UF ESCOLHIDA
-buscarMunicipios() {
+  //BUSCA OS MUNICÍPIOS DA UF
+  buscarMunicipios() {
 
-  // PEGA A UF SELECIONADA NO FORMULÁRIO
-  const uf = this.formulario.get('uf')?.value;
+    const uf = this.formulario.get('uf')?.value;
 
+    this.municipios = [];
 
-  // LIMPA OS MUNICÍPIOS ANTES DE BUSCAR NOVOS
-  this.municipios = [];
-
-
-  // SE NÃO TIVER UF SELECIONADA, NÃO FAZ A BUSCA
-  if (!uf) {
-    return;
-  }
-
-
-  // ATIVA O CARREGAMENTO
-  this.carregandoMuncipios = true;
-
-
-  // CONSULTA A API DO IBGE
-  this.http.get<Municipio[]>(
-    `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
-  )
-  .subscribe({
-
-    next: (dados) => {
-
-      // SALVA OS MUNICÍPIOS RECEBIDOS DA API
-      this.municipios = dados;
-
-      this.carregandoMuncipios = false;
-
-    },
-
-    error: () => {
-
-      // MOSTRA ERRO CASO A CONSULTA FALHE
-      this.erroMunicipios = 'Erro ao carregar municípios';
-
-      this.carregandoMuncipios = false;
-
+    if (!uf) {
+      return;
     }
 
-  });
+    this.carregandoMunicipios = true;
 
-}
+    this.http.get<Municipio[]>(
+      `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`
+    )
+    .subscribe({
 
-//FUNÇÃO PARA PESQUISAR CLIENTES PELO NOME
-pesquisar() {
+      next: (dados) => {
 
-  //PEGA O TEXTO DIGITADO NA PESQUISA
-  const nome = this.campoPesquisa.value?.toLowerCase();
+        this.municipios = dados;
+        this.carregandoMunicipios = false;
 
+      },
 
-  //FILTRA OS CLIENTES PELO NOME
-  this.clientesFiltrados = this.listaClientes.filter(cliente =>
+      error: () => {
 
-    cliente.nome.toLowerCase().includes(nome || '')
+        this.erroMunicipios = 'Erro ao carregar municípios';
+        this.carregandoMunicipios = false;
 
-  );
+      }
 
-}
+    });
 
- //FUNÇÃO PARA SALVAR CLIENTE
-salvar() {
+  }
 
-  //VERIFICA SE PASSARAM NAS VALIDAÇÕES
-  if (this.formulario.valid) {
+  //SALVA O CLIENTE
+  salvar() {
 
-    //PEGA OS VALORES DIGITADOS E TRANSFORMA NO OBJETO CLIENTE
-    const cliente: Cliente = this.formulario.value
+    if (this.formulario.valid) {
 
-    //VERIFICA SE É CADASTRO OU EDIÇÃO
-    if (this.indiceEdicao == -1) {
+      const cliente: Cliente = this.formulario.value;
 
-      //ADICIONA UM NOVO CLIENTE
-      this.listaClientes.push(cliente)
+      this.pessoaService.adicionarCliente(cliente);
+
+      this.formulario.reset();
+
+      this.municipios = [];
 
     } else {
 
-      //ATUALIZA O CLIENTE EDITADO
-      this.listaClientes[this.indiceEdicao] = cliente
-
-      //FINALIZA A EDIÇÃO
-      this.indiceEdicao = -1
+      alert('Preencha os campos obrigatórios!');
 
     }
 
-    // ATUALIZA A LISTA QUE APARECE NA TABELA
-    this.clientesFiltrados = this.listaClientes;
-
-    //LIMPA O FORMULÁRIO
-    this.formulario.reset()
-
-  } else {
-
-    alert('Preencha os campos obrigatórios!')
-
   }
 
-}
-
-
-
-  //FUNÇÃO PARA LIMPAR FORMULÁRIO
+  //LIMPA O FORMULÁRIO
   limpar() {
 
-    this.formulario.reset()
+    this.formulario.reset();
+
+    this.municipios = [];
 
   }
-
-  //FUNÇÃO PARA EXCLUIR CLIENTE
-excluir(indice: number) {
-
-//REMOVE O CLIENTE DA LISTA USANDO A POSIÇÃO RECEBIDA
-//INDICE = POSIÇÃO DO CLIENTE NA LISTA
-//1 = QUANTIDADE DE CLIENTES QUE SERÁ REMOVIDA
-this.listaClientes.splice(indice, 1);
-
-}
-
-  //FUNÇÃO PARA EDITAR CLIENTE
-  editar(indice: number) {
-
-  //GUARDA A POSIÇÃO DO CLIENTE
-  this.indiceEdicao = indice;
-
-  //COLOCA OS DADOS DO CLIENTE NO FORMULÁRIO
-  this.formulario.patchValue(this.listaClientes[indice]);
-
-}
-
 
 }

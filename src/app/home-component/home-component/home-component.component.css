@@ -1,0 +1,18 @@
+#div-home {
+    width: 1000px;
+    height: 1000px;
+    margin: 20px auto;
+    color: var(--cor2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
+
+    border: 2px solid var(--cor1);
+
+}
+
+#titulo-pessoa{
+    color: var(--botao02);
+    font-weight: bold;
+}

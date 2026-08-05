@@ -1,1 +1,49 @@
-<p>lista works!</p>
+<div id="div-lista">
+
+    <h2>Lista de Clientes</h2>
+  
+    <!-- TABELA PARA MOSTRAR OS CLIENTES CADASTRADOS -->
+    <table>
+  
+      <!-- CABEÇALHO DA TABELA -->
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>CPF</th>
+          <th>Data Nascimento</th>
+          <th>UF</th>
+          <th>Município</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+  
+      <!-- CORPO DA TABELA (Corrigido o tbody duplo) -->
+      <tbody>
+        <!-- PERCORRE A LISTA DE CLIENTES E CRIA UMA LINHA PARA CADA UM -->
+        <tr *ngFor="let cliente of clientesFiltrados; let i = index">
+  
+          <!-- MOSTRA OS DADOS DO CLIENTE -->
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.cpf }}</td>
+          <td>{{ cliente.dataNascimento }}</td>
+          <td>{{ cliente.uf }}</td>
+          <td>{{ cliente.municipio }}</td>
+  
+          <td>
+            <button type="button" (click)="editar(i)">
+              Editar
+            </button>
+  
+            <button type="button" (click)="excluir(i)">
+              Excluir
+            </button>
+          </td>
+  
+        </tr>
+      </tbody>
+  
+    </table>
+  
+  </div>

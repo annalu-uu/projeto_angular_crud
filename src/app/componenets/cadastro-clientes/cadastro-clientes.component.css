@@ -1,7 +1,7 @@
-/* DIV PRINCIPAL DA TELA */
+/*DIV PRINCIPAL DA TELA*/
 #div-form {
 
-    width: 100%;
+    width: 60%;
     margin: 20px auto;
     background-color: var(--div-fundo);
     padding: 20px;
@@ -10,7 +10,7 @@
 }
 
 
-/* TÍTULOS */
+/*TÍTULOS*/
 h2 {
 
     text-align: center;
@@ -19,7 +19,7 @@ h2 {
 }
 
 
-/* FORMULÁRIO */
+/*FORMULÁRIO*/
 #cadastro {
 
     display: flex;
@@ -29,7 +29,7 @@ h2 {
 }
 
 
-/* CAMPOS DE TEXTO E SELECT */
+/*CAMPOS DE TEXTO E SELECT*/
 input,
 select {
 
@@ -40,7 +40,7 @@ select {
 }
 
 
-/* ÁREA DE PESQUISA */
+/*ÁREA DE PESQUISA*/
 #pesquisa {
 
     display: flex;
@@ -51,7 +51,7 @@ select {
 }
 
 
-/* BOTÕES GERAIS */
+/*BOTÕES GERAIS*/
 button {
 
     padding: 8px 15px;
@@ -62,7 +62,7 @@ button {
 }
 
 
-/* BOTÃO SALVAR */
+/*BOTÃO SALVAR*/
 button:first-of-type {
 
     background-color: var(--botao1);
@@ -70,7 +70,7 @@ button:first-of-type {
 }
 
 
-/* BOTÃO LIMPAR */
+/*BOTÃO LIMPAR*/
 button:nth-of-type(2) {
 
     background-color: var(--botao2);
@@ -78,14 +78,14 @@ button:nth-of-type(2) {
 }
 
 
-/* EFEITO AO PASSAR O MOUSE */
+/*EFEITO AO PASSAR O MOUSE*/
 button:hover {
 
     opacity: 0.8;
 
 }
 
-/* ÁREA DA LISTA */
+/*ÁREA DA LISTA*/
 #div-lista {
 
     margin-top: 30px;
@@ -93,7 +93,7 @@ button:hover {
 }
 
 
-/* TABELA */
+/*TABELA*/
 table {
 
     width: 100%;
@@ -102,7 +102,7 @@ table {
 }
 
 
-/* CÉLULAS DA TABELA */
+/*CÉLULAS DA TABELA*/
 th,
 td {
 
@@ -113,7 +113,7 @@ td {
 }
 
 
-/* CABEÇALHO DA TABELA */
+/*CABEÇALHO DA TABELA*/
 th {
 
     background-color: var(--cor2);
@@ -122,14 +122,14 @@ th {
 }
 
 
-/* BOTÕES DENTRO DA TABELA */
+/*BOTÕES DENTRO DA TABELA*/
 td button {
 
     margin: 3px;
 
 }
 
-/* BORDA DO TÍTULO */
+/*BORDA DO TÍTULO*/
 h2 {
 
     text-align: center;

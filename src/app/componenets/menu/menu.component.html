@@ -1,15 +1,26 @@
-<header>
-    <div id="menu">
-        <div id="logo">Logo</div>
-        <nav id="nav-id">
-            <li>
-                <a href="#" class="Ink-rota">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="#" routerLInk="/cadastro" class=""
-            </li>
-        </nav>
-    </div>
-</header>
+<nav class="menu" aria-label="Navegação principal">
+    <a
+      routerLink="/cadastro"
+      routerLinkActive="ativo"
+      [routerLinkActiveOptions]="{ exact: false }"
+    >
+      Cadastro
+    </a>
+    <br>
+    <a
+      routerLink="/consulta"
+      routerLinkActive="ativo"
+    >
+      Consulta
+    </a>
+    <br>
+    <a
+      routerLink="/home"
+      routerLinkActive="ativo"
+    >
+      Home
+    </a>
+    
+  </nav>
+
+<router-outlet></router-outlet>
