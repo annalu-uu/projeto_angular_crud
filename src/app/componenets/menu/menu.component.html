@@ -1,26 +1,26 @@
-<nav class="menu" aria-label="Navegação principal">
-    <a
-      routerLink="/cadastro"
-      routerLinkActive="ativo"
-      [routerLinkActiveOptions]="{ exact: false }"
-    >
-      Cadastro
-    </a>
-    <br>
-    <a
-      routerLink="/consulta"
-      routerLinkActive="ativo"
-    >
-      Consulta
-    </a>
-    <br>
-    <a
-      routerLink="/home"
-      routerLinkActive="ativo"
-    >
-      Home
-    </a>
-    
-  </nav>
+<!-- MENU DE NAVEGAÇÃO DA APLICAÇÃO -->
+<nav class="menu" aria-label="NAVEGAÇÃO PRINCIPAL">
 
+  <!-- LINK PARA A PÁGINA DE CADASTRO -->
+  <a routerLink="/cadastro" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: false }">
+    Cadastro
+  </a>
+
+  <br>
+
+  <!-- LINK PARA A PÁGINA DE CONSULTA -->
+  <a routerLink="/consulta" routerLinkActive="ativo">
+    Consulta
+  </a>
+
+  <br>
+
+  <!-- LINK PARA A PÁGINA HOME -->
+  <a routerLink="/home" routerLinkActive="ativo">
+    Home
+  </a>
+
+</nav>
+
+<!-- LOCAL ONDE O ANGULAR EXIBE O COMPONENTE DA ROTA SELECIONADA -->
 <router-outlet></router-outlet>
